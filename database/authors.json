@@ -2,31 +2,37 @@
   {
     "author_id": 1,
     "full_name": "Abdulla Azizov",
-    "phone_number": "+998905714403"
+    "phone_number": "+998905714403",
+    "job": "Web Dasturlash"
   },
   {
     "author_id": 2,
     "full_name": "Akbar Turdiyev",
-    "phone_number": "+998905714403"
+    "phone_number": "+998905714403",
+    "job": "Dizayner"
   },
   {
     "author_id": 3,
     "full_name": "Akbar Jumayev",
-    "phone_number": "+998905714403"
+    "phone_number": "+998905714403",
+    "job": "Web Dasturlash"
   },
   {
     "author_id": 4,
     "full_name": "Begzod Iskandarov",
-    "phone_number": "+998905714403"
+    "phone_number": "+998905714403",
+    "job": "Biznesman"
   },
   {
     "author_id": 5,
     "full_name": "Baxodir Jalolov",
-    "phone_number": "+998905714403"
+    "phone_number": "+998905714403",
+    "job": "Web Dasturlash"
   },
   {
     "author_id": 6,
     "full_name": "Abbos Janizakov",
-    "phone_number": "+998905714403"
+    "phone_number": "+998905714403",
+    "job": "UI/UX"
   }
 ]
