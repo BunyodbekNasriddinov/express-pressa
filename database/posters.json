@@ -8,6 +8,7 @@
     "poster_event_type": "online",
     "poster_link": "https://www.youtube.com/liver24",
     "author_id": 1,
-    "poster_views": 100000000000000000000
+    "poster_views": 100000000000000000000,
+    "poster_status": "pending"
   }
 ]
