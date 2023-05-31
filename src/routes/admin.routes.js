@@ -5,6 +5,7 @@ import checkToken from "../middlewares/checkToken.js";
 
 const router = Router();
 
+// username: admin, password: admin
 router.post("/admin/login", validateHandler, LOGIN);
 router.patch("/admin/poster/:id", checkToken, POSTER_STATUS);
 
