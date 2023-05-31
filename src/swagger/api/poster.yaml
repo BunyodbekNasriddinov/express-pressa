@@ -2,19 +2,67 @@
   get:
     tags:
       - Posters
+    summary: Finds posters by query
+    operationId: findPostsByPage
+    parameters:
+      - name: page
+        in: query
+        description: page query
+        required: false
+        explode: true
+        schema:
+          type: integer
+          default: 1
+          format: integer
+      - name: poster_title
+        in: query
+        description: poster_title query
+        required: false
+        explode: true
+        schema:
+          type: string
+      - name: poster_event_type
+        in: query
+        description: poster_event_type query
+        required: false
+        explode: true
+        schema:
+          type: string
+      - name: sub_category_id
+        in: query
+        description: sub_category_id query
+        required: false
+        explode: true
+        schema:
+          type: integer
+      - name: author_id
+        in: query
+        description: author_id query
+        required: false
+        explode: true
+        schema:
+          type: integer
+      - name: poster_views
+        in: query
+        description: poster_views query
+        required: false
+        explode: true
+        schema:
+          type: integer
+
     responses:
-      200:
-        description: Get all posters successfully
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PosterStatusResponse"
-      400:
-        description: Poster create bad request response
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PosterBadResponse"
+    200:
+      description: Get all posters successfully
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PosterStatusResponse"
+    400:
+      description: Poster create bad request response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PosterBadResponse"
 
 /poster/{id}:
   get:
