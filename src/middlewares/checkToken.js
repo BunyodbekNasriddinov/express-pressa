@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { AuthorizationError } from "../utils/errors";
 
-module.exports = function (req, res, next) {
+export default (req, res, next) => {
   const { token } = req.headers;
   try {
     if (!token) {
@@ -12,6 +12,6 @@ module.exports = function (req, res, next) {
       next();
     }
   } catch (error) {
-    res.status(401).send({ status: 401, message: error.message });
+    res.status(401).send(new AuthorizationError());
   }
 };

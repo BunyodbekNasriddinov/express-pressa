@@ -1,9 +1,11 @@
 export default (err, req, res, next) => {
-  if (err.status !== 500) {
-    res
-      .status(err.status)
-      .json({ status: err.status, name: err.name, message: err.message });
-  }
+  if (!err.status === 500) return res.status(err.status).json(err);
 
-  res.status(500).json({ status: 500, name: err.name });
+  // process.env.ENV === "development";
+
+  console.log(err);
+  if (process.env.ENV === "development") {
+    return res.json(err);
+  }
+  res.status(500).json(err);
 };

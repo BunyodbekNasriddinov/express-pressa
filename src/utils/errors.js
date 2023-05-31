@@ -1,43 +1,43 @@
 export class AuthorizationError extends Error {
-  constructor(status, message) {
+  constructor(message) {
     super();
+    this.status = 401;
     this.name = "AuthorizationError";
-    this.status = status;
     this.message = message;
   }
 }
 export class NotFoundError extends Error {
-  constructor(status, message) {
+  constructor(message) {
     super();
+    this.status = 404;
     this.name = "NotFoundError";
-    this.status = status;
     this.message = message;
   }
 }
 
 export class BadRequestError extends Error {
-  constructor(status, message) {
+  constructor(message) {
     super();
+    this.status = 400;
     this.name = "BadRequestError";
-    this.status = status;
     this.message = message;
   }
 }
 
 export class ForbiddenError extends Error {
-  constructor(status, message) {
+  constructor(message) {
     super();
+    this.status = 403;
     this.name = "ForbiddenError";
-    this.status = status;
     this.message = message;
   }
 }
 
 export class InternalServerError extends Error {
-  constructor(status, message = "InternalServerError") {
+  constructor(message = "InternalServerError") {
     super();
+    this.status = 500;
     this.name = "InternalServerError";
-    this.status = status;
     this.message = message;
   }
 }

@@ -6,21 +6,23 @@ const router = Router();
 
 const swaggerDoc = swaggerJSDoc({
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: "youtube",
-      description: "express-fileupload practice"
+      title: "pressa",
+      description: "pressa master class posters",
     },
     servers: [
       {
-        url: "localhost"
-      }
+        url: "localhost",
+      },
     ],
-
   },
-  apis: [`${process.cwd()}/src/routers/*.js`]
-})
+  apis: [
+    `${process.cwd()}/src/swagger/components/**/*.yaml`,
+    `${process.cwd()}/src/swagger/api/**/*.yaml`,
+  ],
+});
 
-router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
+router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 export default router;

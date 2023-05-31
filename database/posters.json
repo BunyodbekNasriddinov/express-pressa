@@ -2,13 +2,40 @@
   {
     "poster_id": 1,
     "poster_title": "Jahongir G’ulamovdan dizayn sohasi bo’yicha master klass",
+    "poster_body": "Najot Ta'lim jamoasi o'z o'quvchilari uchun manfaatli bo'lgan.",
+    "poster_started_date": "22-01-2022/14:00",
+    "poster_image": "nodejs.jpg",
+    "poster_event_type": "online",
+    "poster_link": "https://www.youtube.com/liver24",
+    "author_id": 1,
+    "sub_category_id": 2,
+    "poster_views": 100000000000000000000,
+    "poster_status": "pending"
+  },
+  {
+    "poster_id": 2,
+    "poster_title": "Jahongir G’ulamovdan dizayn sohasi bo’yicha master klass",
     "poster_body": "Najot Ta'lim jamoasi o'z o'quvchilari uchun manfaatli bo'lgan musobaqalarni tashkil etishda davom etadi. Biz bu gal markazimizdagi uch soha vakillari, ya'ni UX/UI dizayner, frontend va backend dasturchilarni 'bir dasturxon atrofida' to'plashga qaror qildik.",
     "poster_started_date": "22-01-2022/14:00",
     "poster_image": "nodejs.jpg",
     "poster_event_type": "online",
     "poster_link": "https://www.youtube.com/liver24",
     "author_id": 1,
+    "sub_category_id": 2,
     "poster_views": 100000000000000000000,
-    "poster_status": "pending"
+    "poster_status": "active"
+  },
+  {
+    "poster_id": 3,
+    "poster_title": "Jahongir G’ulamovdan dizayn sohasi bo’yicha master klass",
+    "poster_body": "Najot Ta'lim jamoasi o'z o'quvchilari uchun manfaatli bo'lgan musobaqalarni tashkil etishda davom etadi. Biz bu gal markazimizdagi uch soha vakillari, ya'ni UX/UI dizayner, frontend va backend dasturchilarni 'bir dasturxon atrofida' to'plashga qaror qildik.",
+    "poster_started_date": "22-01-2022/14:00",
+    "poster_image": "nodejs.jpg",
+    "poster_event_type": "online",
+    "poster_link": "https://www.youtube.com/liver24",
+    "author_id": 1,
+    "sub_category_id": 2,
+    "poster_views": 100000000000000000000,
+    "poster_status": "active"
   }
 ]

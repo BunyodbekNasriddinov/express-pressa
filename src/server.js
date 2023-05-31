@@ -1,24 +1,22 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const dotenv = require("dotenv");
-const newsRoute = require("./routes/news.routes");
-const adminRoute = require("./routes/admin.routes");
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import "dotenv/config.js";
 
+import allRoutes from "./routes/all.routes.js";
+
+import errorHandler from "./middlewares/errorHandler.js";
+
+const app = express();
+const PORT = process.env.PORT || 5001;
+
+app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
-dotenv.config();
 
-/*
-  /news get all post => []
-  /news post, put, delete token required
-*/
-app.use("/news", newsRoute);
+// all routes
+app.use(allRoutes);
 
-/*
-  username: admin
-  password: admin
-*/
-app.use("/admin", adminRoute);
+app.use(errorHandler);
 
-app.listen(8080, console.log("server running"));
+app.listen(PORT, console.log(`server running ${PORT}`));
