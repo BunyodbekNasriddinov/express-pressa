@@ -1,24 +1,68 @@
 /posters:
+  get:
+    tags:
+      - Posters
+    responses:
+      200:
+        description: Get all posters successfully
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PosterStatusResponse"
+      400:
+        description: Poster create bad request response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PosterBadResponse"
+
+/poster/{id}:
+  get:
+    tags:
+      - Poster
+    summary: Poster get by id
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: number
+    responses:
+      200:
+        description: Get all posters successfully
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PosterStatusResponse"
+      400:
+        description: Poster create bad request response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PosterBadResponse"
+
+/poster:
   post:
     tags:
       - Poster
+    security:
+      - Bearer: []
     summary: Admin poster create
     requestBody:
       content:
         multipart/form-data:
           schema:
-            $ref: '#/components/schemas/Poster'
+            $ref: "#/components/schemas/Poster"
 
     responses:
-      200:
-        description: Admin login successfully response
+      201:
+        description: Poster create successfully
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AdminLoginResponse"
+              $ref: "#/components/schemas/PosterStatusResponse"
       400:
-        description: Admin login bad request response
+        description: Poster create bad request response
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AdminLoginBadResponse"
+              $ref: "#/components/schemas/PosterBadResponse"

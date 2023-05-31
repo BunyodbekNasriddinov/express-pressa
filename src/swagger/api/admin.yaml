@@ -43,6 +43,11 @@
         description: Poster id
         type: number
         required: true
+      - name: poster_status
+        in: body
+        type: string
+        description: Poster status
+        required: true
     responses:
       200:
         description: Poster edit poster_status active

@@ -1,8 +1,6 @@
 import {
   AdminLoginSchema,
   PosterCreateSchema,
-  RegisterSchema,
-  VideoCreateSchema,
 } from "../utils/validationSchemas.js";
 
 import { BadRequestError, InternalServerError } from "../utils/errors.js";

@@ -3,8 +3,6 @@ components:
     Poster:
       type: object
       properties:
-        poster_id:
-          type: integer
         poster_title:
           type: string
         poster_body:
@@ -23,4 +21,13 @@ components:
         poster_views:
           type: integer
         poster_status:
+          type: string
+    PosterBadResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        name:
+          type: string
+        message:
           type: string
