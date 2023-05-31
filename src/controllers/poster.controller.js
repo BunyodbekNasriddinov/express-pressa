@@ -1,12 +1,27 @@
-import { BadRequestError, InternalServerError } from "../utils/errors.js";
-import jwt from "../utils/jwt.js";
-import { queryFilter, read } from "../utils/model.js";
+import {
+  BadRequestError,
+  InternalServerError,
+  NotFoundError,
+} from "../utils/errors.js";
+import { queryFilter, read, write } from "../utils/model.js";
+import { pagenation } from "../configs/config.js";
 
 export const ALL_POSTERS = (req, res, next) => {
   let posters = read("posters");
   const authors = read("authors");
   const categories = read("categories");
   const subCategories = read("subcategories");
+  const { page: defaultPage, limit: defaultLimit } = pagenation;
+
+  const page = req.query.page ? req.query.page : defaultPage;
+  const limit = req.query.limit ? req.query.limit : defaultLimit;
+
+  const offset = (page - 1) * limit;
+
+  posters = posters.splice(offset, limit);
+
+  delete req.query.page;
+  delete req.query.limit;
 
   // filter poster status active
   posters = posters.filter((poster) => poster.poster_status === "active");
@@ -33,8 +48,25 @@ export const ALL_POSTERS = (req, res, next) => {
   }
 
   posters = queryFilter(req.query, posters);
+  res.status(200).json({ status: 200, data: posters.reverse() });
+};
 
-  res.status(200).json({ status: 200, data: posters });
+export const POSTER_BY_ID = (req, res, next) => {
+  const posters = read("posters");
+
+  const { id } = req.params;
+
+  const poster = posters.find((poster) => poster.poster_id === +id);
+
+  try {
+    if (!poster) return next(new NotFoundError(`Not Found poster_id: ${+id}`));
+
+    poster.poster_views += 1;
+
+    console.log(poster);
+    write("posters", posters);
+    res.status(200).json({ status: 200, message: "success", data: poster });
+  } catch (error) {}
 };
 
 export const CREATE_POSTER = (req, res, next) => {
@@ -52,32 +84,41 @@ export const CREATE_POSTER = (req, res, next) => {
     author_id,
     sub_category_id,
   } = req.body;
-  const { image } = req.file;
+  const { filename } = req.file;
 
   try {
-    const author_id = authors.find((author) => author.author_id === +author_id);
+    const find_author_id = authors.find(
+      (author) => author.author_id === +author_id
+    );
 
-    if (!author_id) return next(new BadRequestError("author_id invalid"));
+    if (!find_author_id) return next(new BadRequestError("author_id invalid"));
 
-    const sub_category_id = subCategories.find(
+    const find_sub_category_id = subCategories.find(
       (sub_categy) => sub_categy.sub_category_id === +sub_category_id
     );
 
-    if (!author_id) return next(new BadRequestError("author_id invalid"));
+    if (!find_sub_category_id)
+      return next(new BadRequestError("sub_category_id invalid"));
 
     const newPoster = {
       poster_id: posters.at(-1).poster_id + 1 || 1,
       poster_title,
       poster_body,
       poster_started_date,
-      poster_image: image.filename,
+      poster_image: filename,
       poster_event_type,
       poster_link,
-      author_id,
-      sub_category_id,
+      author_id: +author_id,
+      sub_category_id: +sub_category_id,
       poster_views: 0,
       poster_status: "pending",
     };
+
+    posters.push(newPoster);
+
+    write("posters", posters);
+
+    res.status(201).json({ status: 201, message: "success", data: newPoster });
   } catch (error) {
     next(new InternalServerError(error.message));
   }

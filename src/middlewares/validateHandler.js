@@ -20,27 +20,11 @@ export default (req, res, next) => {
     if (url === "/poster" && method === "POST") {
       const { error } = PosterCreateSchema.validate({
         ...body,
-        poster_image: file.image.originalname,
+        poster_image: file.originalname,
       });
-      if (error) return next(new BadRequestError(error));
+      if (error) return next(new BadRequestError(error.details[0].message));
     }
 
-    //
-
-    if (req.url === "/register" && req.method === "POST") {
-      const { error } = RegisterSchema.validate({
-        avatar: req.files.avatar.name,
-        ...req.body,
-      });
-      if (error) return next(new BadRequestError(error));
-    }
-    if (req.url === "/admin/video" && req.method === "POST") {
-      const { error } = VideoCreateSchema.validate({
-        video: req.files.video.name,
-        ...req.body,
-      });
-      if (error) return next(new BadRequestError(error));
-    }
     next();
   } catch (error) {
     return next(new InternalServerError(error));

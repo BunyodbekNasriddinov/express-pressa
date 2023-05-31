@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { LOGIN } from "../controllers/admin.controller.js";
+import { LOGIN, POSTER_STATUS } from "../controllers/admin.controller.js";
 import validateHandler from "../middlewares/validateHandler.js";
+import checkToken from "../middlewares/checkToken.js";
 
 const router = Router();
 
 router.post("/admin/login", validateHandler, LOGIN);
+router.patch("/admin/poster/:id", checkToken, POSTER_STATUS);
 
 export default router;

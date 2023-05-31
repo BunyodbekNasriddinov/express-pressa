@@ -16,6 +16,16 @@ const swaggerDoc = swaggerJSDoc({
         url: "localhost",
       },
     ],
+    components: {
+      securitySchemes: {
+        Bearer: {
+          type: "apiKey",
+          name: "token",
+          in: "header",
+          description: "Please use login api to get access_token",
+        },
+      },
+    },
   },
   apis: [
     `${process.cwd()}/src/swagger/components/**/*.yaml`,

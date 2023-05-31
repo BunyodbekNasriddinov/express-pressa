@@ -1,8 +1,8 @@
-import { BadRequestError } from "../errors/errors.js";
+import { BadRequestError } from "../utils/errors.js";
 import upload from "../utils/upload.js";
 
 export default (req, res, next) => {
-  return upload.single("avatar")(req, res, (err) => {
+  return upload.single("poster_image")(req, res, (err) => {
     if (err) {
       return next(new BadRequestError(err.message));
     } else {

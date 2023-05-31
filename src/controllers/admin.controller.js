@@ -1,6 +1,10 @@
-import { hashPasswd, read } from "../utils/model.js";
+import { hashPasswd, read, write } from "../utils/model.js";
 import jwt from "../utils/jwt.js";
-import { BadRequestError, InternalServerError } from "../utils/errors.js";
+import {
+  BadRequestError,
+  InternalServerError,
+  NotFoundError,
+} from "../utils/errors.js";
 
 export const LOGIN = (req, res, next) => {
   const admins = read("admins");
@@ -25,6 +29,30 @@ export const LOGIN = (req, res, next) => {
       token,
       data: admin,
     });
+  } catch (error) {
+    next(new InternalServerError(error.message));
+  }
+};
+
+export const POSTER_STATUS = (req, res, next) => {
+  const posters = read("posters");
+
+  const { poster_status } = req.body;
+  const { id } = req.params;
+
+  const findPoster = posters.find((poster) => poster.poster_id === +id);
+  console.log(findPoster, +id);
+  try {
+    if (!findPoster)
+      return next(new NotFoundError(`poster_id: ${id} Not found`));
+
+    if (poster_status === "active") findPoster.poster_status = "active";
+
+    if (poster_status === "archive") findPoster.poster_status = "archive";
+
+    write("posters", posters);
+
+    res.status(200).json({ status: 200, message: "success", data: findPoster });
   } catch (error) {
     next(new InternalServerError(error.message));
   }

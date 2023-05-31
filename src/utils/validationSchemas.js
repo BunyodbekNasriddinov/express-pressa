@@ -34,8 +34,8 @@ export const AdminLoginSchema = Joi.object({
 
 // admin login schema
 export const PosterCreateSchema = Joi.object({
-  poster_title: Joi.string().required().min(46).max(64),
-  poster_body: Joi.string().required().min(32).max(160),
+  poster_title: Joi.string().required().min(24).max(64),
+  poster_body: Joi.string().required().min(32).max(260),
   poster_started_date: Joi.string()
     .required()
     .regex(/^(?:\d{2})-(?:\d{2})-(?:\d{4})\/(?:\d{2}):(?:\d{2})$/), //22-01-2022/14:00 => dd-mm-yyyy/hh:mm
