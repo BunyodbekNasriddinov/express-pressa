@@ -1,1 +1,52 @@
-/admin
+/admin/login:
+  post:
+    tags:
+      - Admin
+    summary: Admin create new video
+    consumes:
+      - application/json
+    parameters:
+      - name: username
+        in: application/json
+        type: string
+        description: The admin login username
+        required: true
+      - name: password
+        in: application/json
+        type: string
+        description: The admin login password
+        required: true
+    responses:
+      200:
+        description: Admin login successfully response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginResponse"
+      400:
+        description: Admin login bad request response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginBadResponse"
+
+/admin/poster/{id}:
+  patch:
+    tags:
+      - Admin
+    security:
+      - Bearer: []
+    summary: The poster return by postre_id
+    parameters:
+      - name: id
+        in: path
+        description: Poster id
+        type: number
+        required: true
+    responses:
+      200:
+        description: Poster edit poster_status active
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PosterStatusResponse"

@@ -2,6 +2,8 @@ import { Router } from "express";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
+const PORT = process.env.PORT;
+
 const router = Router();
 
 const swaggerDoc = swaggerJSDoc({
@@ -13,7 +15,7 @@ const swaggerDoc = swaggerJSDoc({
     },
     servers: [
       {
-        url: "localhost",
+        url: `http://localhost:${PORT}`,
       },
     ],
     components: {
@@ -28,8 +30,8 @@ const swaggerDoc = swaggerJSDoc({
     },
   },
   apis: [
-    `${process.cwd()}/src/swagger/components/**/*.yaml`,
-    `${process.cwd()}/src/swagger/api/**/*.yaml`,
+    `${process.cwd()}/src/swagger/components/*.yaml`,
+    `${process.cwd()}/src/swagger/api/*.yaml`,
   ],
 });
 

@@ -1,0 +1,24 @@
+/posters:
+  post:
+    tags:
+      - Poster
+    summary: Admin poster create
+    requestBody:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/Poster'
+
+    responses:
+      200:
+        description: Admin login successfully response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginResponse"
+      400:
+        description: Admin login bad request response
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginBadResponse"

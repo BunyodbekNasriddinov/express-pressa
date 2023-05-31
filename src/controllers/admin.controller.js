@@ -41,7 +41,7 @@ export const POSTER_STATUS = (req, res, next) => {
   const { id } = req.params;
 
   const findPoster = posters.find((poster) => poster.poster_id === +id);
-  console.log(findPoster, +id);
+
   try {
     if (!findPoster)
       return next(new NotFoundError(`poster_id: ${id} Not found`));
