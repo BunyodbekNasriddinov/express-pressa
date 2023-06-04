@@ -13,7 +13,7 @@ INSERT INTO categories(category_name)
 VALUES ('Information Texnologies'),
   ('Dizayn'),
   ('Biznes'),
-  ('Tal''im');
+  ('Tal''im');pnp
 -- subCategries create
 INSERT INTO subcategries(sub_category_name, category_id)
 VALUES ('Web dasturlash', 1),

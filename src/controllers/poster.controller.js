@@ -64,7 +64,6 @@ export const POSTER_BY_ID = async (req, res, next) => {
     if (!rows.length)
       return next(new NotFoundError(`Not Found poster_id: ${+id}`));
 
-    console.log(rows);
     write("posters", posters);
     res.status(200).json({ status: 200, message: "success", data: rows[0] });
   } catch (error) {
