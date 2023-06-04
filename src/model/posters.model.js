@@ -8,7 +8,7 @@ const allPosters = async ({ offset, limit }) => {
      JOIN authors AS a ON p.author_id = a.author_id
      JOIN categories AS c ON s.category_id = c.category_id
      WHERE p.poster_status = 'active'
-     ORDER BY p.poster_started_date DESC
+     ORDER BY p.poster_id DESC
      OFFSET $1
      LIMIT $2`,
     [offset, limit]
