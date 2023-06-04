@@ -5,19 +5,18 @@ import {
   InternalServerError,
   NotFoundError,
 } from "../utils/errors.js";
+import adminModel from "../model/admin.model.js";
 
-export const LOGIN = (req, res, next) => {
-  const admins = read("admins");
+export const LOGIN = async (req, res, next) => {
+  // const admins = read("admins");
   let { username, password } = req.body;
 
   password = hashPasswd(password);
 
   try {
-    const admin = admins.find(
-      (admin) => admin.username === username && admin.password === password
-    );
+    const admin = await adminModel.adminLogin({ username, password });
 
-    if (!admin) return next(new BadRequestError("Invalid username or passord"));
+    if (!admin) return next(new BadRequestError("Invalid username or password"));
 
     const token = jwt.sign({ admin_id: admin.admin_id });
 
