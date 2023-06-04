@@ -1,4 +1,4 @@
-import { hashPasswd, read, write } from "../utils/model.js";
+import { hashPasswd } from "../utils/model.js";
 import jwt from "../utils/jwt.js";
 import {
   BadRequestError,
@@ -16,7 +16,8 @@ export const LOGIN = async (req, res, next) => {
   try {
     const admin = await adminModel.adminLogin({ username, password });
 
-    if (!admin) return next(new BadRequestError("Invalid username or password"));
+    if (!admin)
+      return next(new BadRequestError("Invalid username or password"));
 
     const token = jwt.sign({ admin_id: admin.admin_id });
 
@@ -33,25 +34,23 @@ export const LOGIN = async (req, res, next) => {
   }
 };
 
-export const POSTER_STATUS = (req, res, next) => {
-  const posters = read("posters");
-
+export const POSTER_STATUS = async (req, res, next) => {
   const { poster_status } = req.body;
   const { id } = req.params;
 
-  const findPoster = posters.find((poster) => poster.poster_id === +id);
-
   try {
-    if (!findPoster)
-      return next(new NotFoundError(`poster_id: ${id} Not found`));
+    if (
+      poster_status === "active" ||
+      poster_status === "archive" ||
+      poster_status === "deleted"
+    ) {
+      const rows = await adminModel.posterStatus({ id, poster_status });
 
-    if (poster_status === "active") findPoster.poster_status = "active";
+      if (!rows.length)
+        return next(new NotFoundError(`poster_id: ${id} Not found`));
 
-    if (poster_status === "archive") findPoster.poster_status = "archive";
-
-    write("posters", posters);
-
-    res.status(200).json({ status: 200, message: "success", data: findPoster });
+      res.status(200).json({ status: 200, message: "success", data: rows[0] });
+    } else return next(new BadRequestError("poster_status invalid"));
   } catch (error) {
     next(new InternalServerError(error.message));
   }

@@ -6,8 +6,8 @@ VALUES (
     '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'
   );
 -- author create
-INSERT INTO authors (author_id, full_name, phone_number, job)
-VALUES (1, 'PostgreSQL', '+998909992122', 'Dizayn');
+INSERT INTO authors (full_name, phone_number, job)
+VALUES ('PostgreSQL', '+998909992122', 'Dizayn');
 -- categries create
 INSERT INTO categories(category_name)
 VALUES ('Information Texnologies'),
@@ -15,7 +15,7 @@ VALUES ('Information Texnologies'),
   ('Biznes'),
   ('Tal''im');
 -- subCategries create
-INSERT INTO subCategries(sub_category_name, category_id)
+INSERT INTO subcategries(sub_category_name, category_id)
 VALUES ('Web dasturlash', 1),
   ('Mobile dasturlash', 1),
   ('UI/UX dizayn', 2),

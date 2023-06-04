@@ -11,8 +11,7 @@ export const fetchAll = async (SQL, params = []) => {
   const client = await pool.connect();
 
   try {
-    const { rows } = client.query(SQL, params);
-    console.log('rows: ', rows);
+    const { rows } = await client.query(SQL, params);
     return rows;
   } catch (error) {
     return new InternalServerError(error.message);

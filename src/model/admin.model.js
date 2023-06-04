@@ -1,16 +1,19 @@
 import { fetchAll } from "./setup.js";
 
 const adminLogin = async ({ username, password }) => {
-  const admins = await fetchAll(
+  const admin = await fetchAll(
     "SELECT * FROM admins WHERE username = $1 AND  password = $2",
     [username, password]
   );
-  return admins;
+  return admin;
 };
 
 const posterStatus = async ({ id, poster_status }) => {
-  const posters = await fetchAll(
-    "SELECT poster_id, poster_status FROM posters UPDATE posters SET WHERE poster_id = $1 AND $2 = active OR $2 = archive OR $2 = deleted",
+  return await fetchAll(
+    `UPDATE posters
+     SET poster_status = $2
+     WHERE poster_id = $1 AND $2 = 'active' OR $2 = 'archive' OR $2 = 'deleted'       
+     RETURNING *`,
     [id, poster_status]
   );
 };

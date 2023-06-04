@@ -1,29 +1,29 @@
 CREATE DATABASE express_pressa;
-DROP TABLE IF EXISTS admins;
+DROP TABLE IF EXISTS admins CASCADE;
 CREATE TABLE admins(
   admin_id SERIAL PRIMARY KEY UNIQUE,
   username VARCHAR(32) NOT NULL UNIQUE,
   password VARCHAR(200) NOT NULL
 );
-DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS categories CASCADE;
 CREATE TABLE categories(
   category_id SERIAL PRIMARY KEY UNIQUE,
   category_name VARCHAR(64)
 );
-DROP TABLE IF EXISTS subCategories;
+DROP TABLE IF EXISTS subCategories CASCADE;
 CREATE TABLE subCategories(
   sub_category_id SERIAL PRIMARY KEY,
   sub_category_name VARCHAR(64),
   category_id INT REFERENCES categories(category_id)
 );
-DROP TABLE IF EXISTS authors;
+DROP TABLE IF EXISTS authors CASCADE;
 CREATE TABLE authors(
   author_id SERIAL PRIMARY KEY UNIQUE,
   full_name VARCHAR(32) NOT NULL,
   phone_number VARCHAR(13) NOT NULL,
   job VARCHAR(32) NOT NULL
 );
-DROP TABLE IF EXISTS posters;
+DROP TABLE IF EXISTS posters CASCADE;
 CREATE TABLE posters(
   poster_id SERIAL PRIMARY KEY UNIQUE,
   poster_title VARCHAR(64) NOT NULL,
